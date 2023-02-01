@@ -21,6 +21,7 @@ public class reflect {
         System.out.println(c4.hashCode());
         //方式三 对象.getClass()
         Class<? extends animal> c5 = new animal().getClass();
+        System.out.println("1");
 
 
 
