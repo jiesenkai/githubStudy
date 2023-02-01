@@ -14,6 +14,7 @@ public class TEST {
         Method doSome = aClass.getDeclaredMethod("doSome",String.class,int.class);
         Object 小凯 = doSome.invoke(aClass.newInstance(), "小凯", 19);
 //        System.out.println(小凯);
+        System.out.println("我");
     }
 
 }
