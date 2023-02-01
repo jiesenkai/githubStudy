@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <!-- 开启注解扫描 -->
+        <context:component-scan base-package="com.jsk"/>
+
+    <!-- 引入外部properties 数据-->
+        <context:property-placeholder location="jdbc.properties"/>
+
+
+    <!-- 配置mybatis-->
+       <bean class="org.mybatis.spring.SqlSessionFactoryBean">
+           <!-- 注入 格式别名配置-->
+           <property name="typeAliasesPackage" value="com.jsk.pojo"></property>
+           <!-- 注入 数据连接池配置-->
+           <property name="dataSource" ref="dataSource"></property>
+           <!-- 注入 mybatis.xml外部配置-->
+           <property name="configLocation" value="mybatis.xml"></property>
+       </bean>
+    <!-- 数据库连接池信息配置 -->
+        <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+            <property name="url" value="${jdbc.url}"></property>
+            <property name="username" value="${jdbc.username}"></property>
+            <property name="password" value="${jdbc.password}"></property>
+            <property name="driverClassName" value="${jdbc.driver}"></property>
+        </bean>
+    <!-- Mapper扫描配置器 主要扫描Mapper接口 产生代理-->
+        <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+            <property name="basePackage" value="com.jsk.mappers"></property>
+        </bean>
+
+</beans>
